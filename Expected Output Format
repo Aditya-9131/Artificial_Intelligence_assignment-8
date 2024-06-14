@@ -1,0 +1,10 @@
+BFS Solution: [0, 4, 7, 5, 2, 6, 1, 3]
+Nodes expanded: X
+Max queue length: Y
+
+DFS Solution: [0, 4, 7, 5, 2, 6, 1, 3]
+Nodes expanded: X
+Max stack length: Y
+
+IDS Solution: [0, 4, 7, 5, 2, 6, 1, 3]
+Nodes expanded: X
