@@ -1,0 +1,5 @@
+# Artificial_Intelligence_assignment-8
+Given_question:->Explore the 8 Queens problem by defining the state space search through both incremental
+and complete state formulations. Proceed to solve the problem and analyze the solutions
+obtained using Breadth-First Search (BFS), Depth-First Search (DFS), and the Iterative
+Deepening algorithm for comparison
