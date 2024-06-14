@@ -1,0 +1,14 @@
+initial_state = State()
+solution_bfs, nodes_expanded_bfs, max_queue_length_bfs = bfs(initial_state)
+print("BFS Solution:", solution_bfs)
+print("Nodes expanded:", nodes_expanded_bfs)
+print("Max queue length:", max_queue_length_bfs)
+
+solution_dfs, nodes_expanded_dfs, max_stack_length_dfs = dfs(initial_state)
+print("\nDFS Solution:", solution_dfs)
+print("Nodes expanded:", nodes_expanded_dfs)
+print("Max stack length:", max_stack_length_dfs)
+
+solution_ids, nodes_expanded_ids = iterative_deepening(initial_state)
+print("\nIDS Solution:", solution_ids)
+print("Nodes expanded:", nodes_expanded_ids)
