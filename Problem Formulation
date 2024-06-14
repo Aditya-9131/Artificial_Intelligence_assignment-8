@@ -1,0 +1,97 @@
+class State:
+    def __init__(self, queens=[]):
+        self.queens = queens  
+        self.n = 8  
+
+    def is_goal(self):
+        return len(self.queens) == self.n
+
+    def get_successors(self):
+        if self.is_goal():
+            return []
+
+        successors = []
+        row = len(self.queens)
+        for col in range(self.n):
+            if self.is_valid_move(row, col):
+                new_queens = self.queens + [col]
+                successors.append(State(new_queens))
+        return successors
+
+    def is_valid_move(self, row, col):
+        for r, c in enumerate(self.queens):
+            if c == col or abs(c - col) == abs(r - row):
+                return False
+        return True
+
+    def __repr__(self):
+        return str(self.queens)
+
+def bfs(initial_state):
+    from collections import deque
+
+    queue = deque([initial_state])
+    nodes_expanded = 0
+    max_queue_length = 1
+
+    while queue:
+        state = queue.popleft()
+        nodes_expanded += 1
+
+        if state.is_goal():
+            return state, nodes_expanded, max_queue_length
+
+        for successor in state.get_successors():
+            queue.append(successor)
+
+        max_queue_length = max(max_queue_length, len(queue))
+
+    return None, nodes_expanded, max_queue_length
+
+def dfs(initial_state):
+    stack = [initial_state]
+    nodes_expanded = 0
+    max_stack_length = 1
+
+    while stack:
+        state = stack.pop()
+        nodes_expanded += 1
+
+        if state.is_goal():
+            return state, nodes_expanded, max_stack_length
+
+        for successor in state.get_successors():
+            stack.append(successor)
+
+        max_stack_length = max(max_stack_length, len(stack))
+
+    return None, nodes_expanded, max_stack_length
+
+def iterative_deepening(initial_state):
+    depth = 0
+    nodes_expanded = 0
+
+    while True:
+        result, expanded = depth_limited_search(initial_state, depth)
+        nodes_expanded += expanded
+        if result:
+            return result, nodes_expanded
+        depth += 1
+
+def depth_limited_search(state, limit):
+    return recursive_dls(state, limit, 0)
+
+def recursive_dls(state, limit, nodes_expanded):
+    if state.is_goal():
+        return state, nodes_expanded
+    elif limit == 0:
+        return None, nodes_expanded
+    else:
+        cutoff_occurred = False
+        for successor in state.get_successors():
+            nodes_expanded += 1
+            result, expanded = recursive_dls(successor, limit - 1, nodes_expanded)
+            nodes_expanded += expanded
+            if result:
+                return result, nodes_expanded
+        return None, nodes_expanded
